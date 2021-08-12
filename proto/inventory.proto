@@ -1,5 +1,6 @@
 syntax = "proto3";
 
+#Assinatura da função para procurar os produtos
 service InventoryService {
     rpc SearchAllProducts(Empty) returns (ProductsResponse) {}
     rpc SearchProductByID(Payload) returns (ProductResponse) {}
@@ -7,6 +8,7 @@ service InventoryService {
 
 message Empty{}
 
+//Atributos do produto, como identificador, nome, quantidade, preço, autor e imagem.
 message ProductResponse {
     int32 id = 1;
     string name = 2;
@@ -16,10 +18,12 @@ message ProductResponse {
     string author = 6;
 }
 
+//Retorno da função. Qual produto será apresentado?
 message ProductsResponse {
     repeated ProductResponse products = 1;
 }
 
+//Declaração da identificação do produto que será buscado
 message Payload {
     int32 id = 1;
 }

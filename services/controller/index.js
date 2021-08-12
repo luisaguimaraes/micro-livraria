@@ -6,9 +6,8 @@ const cors = require('cors');
 const app = express();
 app.use(cors());
 
-/**
- * Retorna a lista de produtos da loja via InventoryService
- */
+//Retorna a lista de produtos da loja via InventoryService
+ 
 app.get('/products', (req, res, next) => {
     inventory.SearchAllProducts(null, (err, data) => {
         if (err) {
@@ -20,9 +19,8 @@ app.get('/products', (req, res, next) => {
     });
 });
 
-/**
- * Consulta o frete de envio no ShippingService
- */
+// Consulta o frete de envio no ShippingService
+
 app.get('/shipping/:cep', (req, res, next) => {
     shipping.GetShippingRate(
         {
@@ -43,7 +41,7 @@ app.get('/shipping/:cep', (req, res, next) => {
 });
 
 app.get('/product/:id', (req, res, next) =>{
-    // Chama método do microsserviço
+    // Chama o método do microsserviço
     inventory.SearchProductByID({ id: req.params.id }, (err, product) =>{
         // Se ocorrer algum erro de comunicação
         // com o microsserviço, retorna para o navegador.
@@ -51,16 +49,13 @@ app.get('/product/:id', (req, res, next) =>{
             console.log(err);
             res.status(500).send({error: 'something failed :('});
         }else{
-            /*Caso contrário, retorna resultado do micrisserviço
-            um arquivo JSON com os dados do produto presquisado*/
+            //Caso contrário, retorna resultado do microsserviço
+            //um arquivo JSON com os dados do produto pesquisado
             res.json(product);
         }
     })
 })
 
-/**
- * Inicia o router
- */
 app.listen(3000, () => {
     console.log('Controller Service running on http://127.0.0.1:3000');
 });

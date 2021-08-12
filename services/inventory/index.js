@@ -20,10 +20,11 @@ server.addService(inventoryProto.InventoryService.service, {
             products: products,
         });
     },
+//Busca produto por identificador
     SearchProductByID: (payload, callback) =>{
         callback(
             null,
-            products.find((product)=> product.id == payload.request.id)
+            products.find((product)=> product.id == payload.request.id) 
         );
     },
 });
